@@ -3,54 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bounce Breakers</title>
+    <title>Bounce Breakers Runner</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="game-shell">
       <header class="hud">
-        <div class="hud-block"><span class="label">Wave</span><span id="waveValue">1</span></div>
-        <div class="hud-block"><span class="label">Score</span><span id="scoreValue">0</span></div>
-        <div class="hud-block"><span class="label">Combo</span><span id="comboValue">x1</span></div>
-        <div class="hud-block fever-wrap"><span class="label">Momentum Fever</span><div class="meter"><div id="feverMeter"></div></div></div>
+        <div class="hud-block"><span class="label">Distance</span><span id="distanceValue">0m</span></div>
+        <div class="hud-block"><span class="label">Speed</span><span id="speedValue">0</span></div>
+        <div class="hud-block"><span class="label">Fever</span><div class="meter"><div id="feverMeter"></div></div></div>
+        <div class="hud-block"><span class="label">HP</span><div class="meter"><div id="hpMeter"></div></div></div>
       </header>
 
-      <section class="secondary-hud">
-        <div class="hud-block"><span class="label">Stability</span><div class="meter"><div id="stabilityMeter"></div></div></div>
-        <div class="hud-block"><span class="label">Upgrade Points</span><span id="upgradePointsValue">0</span></div>
-        <div class="hud-block upgrades"><span class="label">Upgrades (1/2/3)</span><span id="upgradeState">Dash+0 | Grip+0 | Shield+0</span></div>
-      </section>
-
-      <section class="unlock-strip">
-        <div class="hud-block"><span class="label">Ability Unlocks</span><span id="unlockState">Dash ✅ | Slam 🔒(Wave 2) | Flick 🔒(Wave 3)</span></div>
+      <section class="hud unlocks">
+        <div class="hud-block"><span class="label">Ability Points</span><span id="pointsValue">0</span></div>
+        <div class="hud-block"><span class="label">Ability Unlocks</span><span id="unlockState">Boost 🔒 | Explosion 🔒 | Split 🔒</span></div>
+        <div class="hud-block"><span class="label">Controls</span><span>Jump: Space, Boost: Shift, Explosion: E, Split: Q</span></div>
       </section>
 
       <main>
         <div id="arena">
-          <div id="roadFlow"></div>
+          <div id="bgFar"></div>
+          <div id="bgMid"></div>
+          <div id="bgNear"></div>
           <div id="track"></div>
-          <div id="parallaxBack"></div>
-          <div id="parallaxFront"></div>
-          <div id="bgPulse"></div>
-          <div id="player" aria-label="Courier Blob">
-            <div class="eyes"><span></span><span></span></div>
-            <div class="mouth"></div>
+          <div id="player"><div class="eyes"><span></span><span></span></div></div>
+          <div id="deathOverlay" class="hidden">
+            <h2>Courier Down 💥</h2>
+            <p id="deathSummary"></p>
+            <button id="restartBtn">Restart Run</button>
           </div>
         </div>
       </main>
-
-      <footer class="controls">
-        <p><strong>Move:</strong> WASD / Arrows</p>
-        <p><strong>Dash:</strong> Shift</p>
-        <p><strong>Ground Slam:</strong> Space (Wave 2)</p>
-        <p><strong>Flick Redirect:</strong> Mouse / J (Wave 3)</p>
-        <p><strong>Upgrades:</strong> 1 Dash, 2 Grip, 3 Shield</p>
-      </footer>
     </div>
 
-    <template id="enemyTemplate"><div class="enemy push-bot"><span></span></div></template>
     <template id="particleTemplate"><div class="particle"></div></template>
-
     <script src="game.js"></script>
   </body>
 </html>

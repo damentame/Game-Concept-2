@@ -1,32 +1,26 @@
-# Bounce Breakers (Web Prototype)
+# Bounce Breakers Runner
 
-Fast neon momentum game prototype focused on smooth movement and readable feedback.
+A simplified auto-runner version of Bounce Breakers.
 
-## Features
+## What changed
 
-- Momentum movement with drift + ricochet.
-- Side-scrolling **moving background/track** (right-to-left racer-like illusion).
-- Performance-focused effects pass:
-  - significantly reduced particle counts
-  - hard particle cap
-  - lighter trail spawning
-- Ability unlock progression:
-  - Dash available immediately
-  - Slam unlocks at Wave 2
-  - Flick unlocks at Wave 3
-- Upgrade progression (spend points with keys `1/2/3`):
-  - Dash power
-  - Grip
-  - Shield
-- Penalty system via Stability meter.
+- The ball now moves left-to-right automatically (no left/right controls).
+- Normal gravity is applied at all times.
+- Fast side-scrolling background layers create a racer-like motion feel.
+- Terrain includes rolling ramps so the ball can launch and land.
+- Momentum Fever increases bounce intensity and visual intensity.
+- Unlockable abilities as distance increases:
+  - **Boost** (`Shift`)
+  - **Explosion** (`E`)
+  - **Split** (`Q`)
+- The player can die from impact damage (HP reaches zero) or falling off the track.
 
 ## Controls
 
-- Move: `WASD` / Arrow keys
-- Dash: `Shift`
-- Slam: `Space` (after unlock)
-- Flick: Mouse click / `J` (after unlock)
-- Upgrades: `1` / `2` / `3`
+- Jump: `Space`
+- Boost (unlock): `Shift`
+- Explosion (unlock): `E`
+- Split (unlock): `Q`
 
 ## Run
 
@@ -34,4 +28,4 @@ Fast neon momentum game prototype focused on smooth movement and readable feedba
 python3 -m http.server 4173
 ```
 
-Open: `http://127.0.0.1:4173`
+Then open `http://127.0.0.1:4173`.
