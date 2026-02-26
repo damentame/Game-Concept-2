@@ -1,0 +1,76 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #33225f, #0f0624 45%, #06030f 100%);
+  color: #ebf4ff;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+#game {
+  width: min(96vw, 1280px);
+  height: auto;
+  border: 2px solid rgba(125, 255, 255, 0.5);
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(65, 255, 225, 0.2), inset 0 0 30px rgba(255, 41, 175, 0.2);
+  background: linear-gradient(160deg, #120920, #090416 70%);
+}
+
+.hud {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.brand,
+.stats,
+.hint {
+  backdrop-filter: blur(8px);
+  background: rgba(7, 9, 23, 0.5);
+  border: 1px solid rgba(125, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+}
+
+.stats {
+  display: flex;
+  gap: 0.9rem;
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) scale(0.85);
+  opacity: 0;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ff5dcf, #ffe460);
+  color: #270c31;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.toast.on {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}

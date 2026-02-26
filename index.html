@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bounce Breakers</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="hud">
+      <div class="brand">🎮 Bounce Breakers</div>
+      <div class="stats">
+        <span>Wave <strong id="wave">1</strong></span>
+        <span>Score <strong id="score">0</strong></span>
+        <span>Combo <strong id="combo">x1</strong></span>
+        <span>Fever <strong id="fever">0%</strong></span>
+      </div>
+      <div class="hint">WASD / Arrows: move · Shift: dash · Space: slam · J/Mouse: flick</div>
+    </div>
+    <canvas id="game" width="1280" height="720"></canvas>
+    <div id="toast" class="toast">Momentum Fever!</div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
