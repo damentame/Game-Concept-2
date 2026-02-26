@@ -27,8 +27,26 @@
         </div>
       </header>
 
+      <section class="secondary-hud">
+        <div class="hud-block">
+          <span class="label">Stability</span>
+          <div class="meter"><div id="stabilityMeter"></div></div>
+        </div>
+        <div class="hud-block">
+          <span class="label">Upgrade Points</span>
+          <span id="upgradePointsValue">0</span>
+        </div>
+        <div class="hud-block upgrades">
+          <span class="label">Upgrades (1/2/3)</span>
+          <span id="upgradeState">Dash+0 | Grip+0 | Shield+0</span>
+        </div>
+      </section>
+
       <main>
         <div id="arena">
+          <div id="track"></div>
+          <div id="parallaxBack"></div>
+          <div id="parallaxFront"></div>
           <div id="bgPulse"></div>
           <div id="player" aria-label="Courier Blob">
             <div class="eyes"><span></span><span></span></div>
@@ -42,6 +60,7 @@
         <p><strong>Dash:</strong> Shift</p>
         <p><strong>Ground Slam:</strong> Space</p>
         <p><strong>Flick Redirect:</strong> Mouse click / J</p>
+        <p><strong>Upgrades:</strong> 1 Dash, 2 Grip, 3 Shield</p>
       </footer>
     </div>
 
