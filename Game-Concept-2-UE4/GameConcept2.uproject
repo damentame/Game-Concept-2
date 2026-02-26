@@ -1,0 +1,16 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "4.27",
+  "Category": "Games",
+  "Description": "Game-Concept-2 Unreal Engine 4 project root (third-person template baseline).",
+  "Modules": [
+    {
+      "Name": "GameConcept2",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "TargetPlatforms": [
+    "Linux"
+  ]
+}

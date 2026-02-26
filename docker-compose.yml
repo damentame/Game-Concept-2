@@ -1,0 +1,35 @@
+version: "3.9"
+
+x-ue4-common: &ue4-common
+  build:
+    context: .
+    dockerfile: Dockerfile.ue4
+    args:
+      UE4_IMAGE: ${UE4_IMAGE:-adamrehn/ue4-full:4.27.2}
+  working_dir: /workspace
+  volumes:
+    - ./:/workspace
+    - ue4-derived-data-cache:/home/ue4/UnrealEngine/Engine/DerivedDataCache
+  environment:
+    UE4_PROJECT: /workspace/Game-Concept-2-UE4/GameConcept2.uproject
+
+services:
+  ue4-generate-project-files:
+    <<: *ue4-common
+    command: ["bash", "-lc", "./scripts/generate_project_files.sh"]
+
+  ue4-development-editor:
+    <<: *ue4-common
+    command: ["bash", "-lc", "./scripts/build_development_editor.sh"]
+
+  ue4-shipping:
+    <<: *ue4-common
+    command: ["bash", "-lc", "./scripts/build_shipping.sh"]
+
+  ue4-buildcookrun-shipping:
+    <<: *ue4-common
+    command: ["bash", "-lc", "./scripts/buildcookrun_shipping.sh"]
+
+volumes:
+  ue4-derived-data-cache:
+    name: gameconcept2_ue4_derived_data_cache
