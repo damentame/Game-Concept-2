@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bounce Breakers</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="game-shell">
+      <header class="hud">
+        <div class="hud-block">
+          <span class="label">Wave</span>
+          <span id="waveValue">1</span>
+        </div>
+        <div class="hud-block">
+          <span class="label">Score</span>
+          <span id="scoreValue">0</span>
+        </div>
+        <div class="hud-block">
+          <span class="label">Combo</span>
+          <span id="comboValue">x1</span>
+        </div>
+        <div class="hud-block fever-wrap">
+          <span class="label">Momentum Fever</span>
+          <div class="meter"><div id="feverMeter"></div></div>
+        </div>
+      </header>
+
+      <main>
+        <div id="arena">
+          <div id="bgPulse"></div>
+          <div id="player" aria-label="Courier Blob">
+            <div class="eyes"><span></span><span></span></div>
+            <div class="mouth"></div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="controls">
+        <p><strong>Move:</strong> WASD / Arrows</p>
+        <p><strong>Dash:</strong> Shift</p>
+        <p><strong>Ground Slam:</strong> Space</p>
+        <p><strong>Flick Redirect:</strong> Mouse click / J</p>
+      </footer>
+    </div>
+
+    <template id="enemyTemplate">
+      <div class="enemy push-bot"><span></span></div>
+    </template>
+
+    <template id="particleTemplate">
+      <div class="particle"></div>
+    </template>
+
+    <script src="game.js"></script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+:root {
+  --bg: #0b0820;
+  --neon-a: #5ef0ff;
+  --neon-b: #ff47c7;
+  --neon-c: #a8ff63;
+  --text: #eff5ff;
+  --warn: #ff8f55;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 20%, #201259, #050311 55%);
+}
+
+#game-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(100px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.hud-block {
+  background: rgba(15, 18, 42, 0.7);
+  border: 1px solid rgba(111, 132, 255, 0.5);
+  border-radius: 12px;
+  padding: 0.5rem 0.7rem;
+  box-shadow: 0 0 14px rgba(73, 143, 255, 0.25);
+}
+
+.label { display: block; font-size: 0.72rem; opacity: 0.8; }
+#waveValue, #scoreValue, #comboValue { font-size: 1.4rem; font-weight: 700; }
+
+.fever-wrap .meter {
+  height: 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 999px;
+  margin-top: 0.2rem;
+  overflow: hidden;
+}
+#feverMeter {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #58d8ff, #ff5ccb, #fff46a);
+  transition: width 120ms linear;
+}
+
+#arena {
+  position: relative;
+  height: 70vh;
+  min-height: 450px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid rgba(133, 170, 255, 0.4);
+  background:
+    linear-gradient(120deg, rgba(95,26,189,0.22), rgba(36,188,206,0.2)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 20px, transparent 20px 40px);
+}
+
+#arena::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.4));
+}
+
+#bgPulse {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at center, rgba(255,90,196,0.25), rgba(73,230,255,0.08), transparent 60%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: drift 8s ease-in-out infinite alternate;
+}
+
+#player {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border-radius: 42% 58% 54% 46% / 40% 49% 51% 60%;
+  transform-origin: center;
+  background: linear-gradient(145deg, #95f9ff, #29b2ff 45%, #9f6dff);
+  box-shadow:
+    0 0 24px rgba(65, 191, 255, 0.8),
+    inset -6px -8px 15px rgba(30, 37, 141, 0.48),
+    inset 5px 6px 10px rgba(255,255,255,0.55);
+  z-index: 5;
+}
+
+#player.idle {
+  animation: bounceIdle 920ms ease-in-out infinite;
+}
+
+.eyes {
+  position: absolute;
+  width: 70%;
+  top: 34%;
+  left: 16%;
+  display: flex;
+  justify-content: space-between;
+}
+.eyes span {
+  width: 7px;
+  height: 9px;
+  border-radius: 50%;
+  background: #132847;
+}
+.mouth {
+  position: absolute;
+  width: 18px;
+  height: 7px;
+  border-radius: 0 0 9px 9px;
+  border-bottom: 2px solid #1d2f51;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 61%;
+}
+
+.enemy {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.push-bot {
+  background: linear-gradient(145deg, #ff79e2, #8d54ff);
+  box-shadow: 0 0 16px rgba(255, 90, 190, 0.7);
+}
+.push-bot span {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.8);
+  animation: pulse 0.8s infinite;
+}
+
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: var(--neon-a);
+  box-shadow: 0 0 12px currentColor;
+  z-index: 2;
+}
+
+.trail {
+  position: absolute;
+  width: 26px;
+  height: 12px;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(100,255,240,0.8), rgba(255,95,210,0.08));
+  filter: blur(1px);
+}
+
+.fever {
+  animation: feverShake 320ms linear infinite;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 0.2rem 1rem;
+  opacity: 0.9;
+}
+
+@keyframes bounceIdle {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  25% { transform: translateY(2px) scale(1.05, 0.94); }
+  55% { transform: translateY(-4px) scale(0.94, 1.08); }
+}
+@keyframes pulse { from { transform: scale(1); opacity: 1;} to { transform: scale(1.4); opacity: 0;} }
+@keyframes drift { from { transform: translate(-6%, -2%) scale(1);} to { transform: translate(8%, 4%) scale(1.1);} }
+@keyframes feverShake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(1px); }
+  50% { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
