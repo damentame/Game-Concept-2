@@ -1,39 +1,37 @@
 # Bounce Breakers (Web Prototype)
 
-A fast, neon, momentum-heavy arcade prototype where movement is your main weapon.
+Fast neon momentum game prototype focused on smooth movement and readable feedback.
 
 ## Features
 
-- **Momentum movement loop**: acceleration + drift + ricochet motion.
-- **Expressive controls**:
-  - Move: `WASD` / Arrow keys
-  - Dash impulse: `Shift`
-  - Ground slam: `Space`
-  - Redirect flick: Mouse click / `J`
-- **Moving arena track** with layered parallax motion.
-- **Micro-animations**:
-  - Blob idle bounce
-  - Squash-and-stretch at speed
-  - Speed trails
-  - Impact bursts (small exploding balls) on target hits
-- **Penalty mechanic**: Stability meter drains on bad collisions / hard wall impacts.
-- **Progression + upgrades**:
-  - Wave scaling (enemy count + speed)
-  - Upgrade points each wave
-  - Spend points with:
-    - `1` Dash Power
-    - `2` Grip (momentum retention)
-    - `3` Shield (penalty reduction)
-- **Momentum Fever** rewards sustained high speed.
+- Momentum movement with drift + ricochet.
+- Side-scrolling **moving background/track** (right-to-left racer-like illusion).
+- Performance-focused effects pass:
+  - significantly reduced particle counts
+  - hard particle cap
+  - lighter trail spawning
+- Ability unlock progression:
+  - Dash available immediately
+  - Slam unlocks at Wave 2
+  - Flick unlocks at Wave 3
+- Upgrade progression (spend points with keys `1/2/3`):
+  - Dash power
+  - Grip
+  - Shield
+- Penalty system via Stability meter.
 
-## Run locally
+## Controls
+
+- Move: `WASD` / Arrow keys
+- Dash: `Shift`
+- Slam: `Space` (after unlock)
+- Flick: Mouse click / `J` (after unlock)
+- Upgrades: `1` / `2` / `3`
+
+## Run
 
 ```bash
 python3 -m http.server 4173
 ```
 
-Then open: `http://127.0.0.1:4173`
-
-## Goal
-
-Build speed, slam through targets, maintain combo, survive escalating waves, and invest upgrades to adapt your playstyle.
+Open: `http://127.0.0.1:4173`

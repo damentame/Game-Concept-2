@@ -1,16 +1,9 @@
 :root {
   --ink: #070b1b;
-  --night: #090f2b;
-  --line: #2f5f8f;
-  --aqua: #70efff;
-  --cyan: #2dd7f4;
-  --violet: #9872ff;
-  --pink: #ff6fd8;
-  --lime: #b9ff66;
-  --warn: #ff8f66;
   --text: #e9f4ff;
+  --cyan: #2dd7f4;
+  --pink: #ff6fd8;
 }
-
 * { box-sizing: border-box; }
 body {
   margin: 0;
@@ -19,49 +12,26 @@ body {
   min-height: 100vh;
   background: radial-gradient(circle at 20% 0%, #1a2550, #070b1b 56%);
 }
-
 #game-shell { max-width: 1200px; margin: 0 auto; padding: 1rem; }
 
-.hud,
-.secondary-hud {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(100px, 1fr));
-  gap: 0.55rem;
-  margin-bottom: 0.55rem;
-}
+.hud, .secondary-hud { display: grid; grid-template-columns: repeat(4, minmax(100px, 1fr)); gap: 0.55rem; margin-bottom: 0.55rem; }
 .secondary-hud { grid-template-columns: 1.1fr 0.7fr 2fr; }
+.unlock-strip { margin-bottom: 0.55rem; }
 
 .hud-block {
   background: linear-gradient(145deg, rgba(8, 15, 39, 0.78), rgba(26, 37, 78, 0.58));
   border: 1px solid rgba(110, 180, 255, 0.45);
   border-radius: 12px;
   padding: 0.5rem 0.7rem;
-  box-shadow: 0 0 16px rgba(61, 168, 255, 0.24);
+  box-shadow: 0 0 12px rgba(61, 168, 255, 0.2);
 }
-
 .label { display: block; font-size: 0.72rem; opacity: 0.86; }
-#waveValue, #scoreValue, #comboValue, #upgradePointsValue { font-size: 1.35rem; font-weight: 700; }
-#upgradeState { font-weight: 600; color: #caf6ff; }
+#waveValue, #scoreValue, #comboValue, #upgradePointsValue { font-size: 1.3rem; font-weight: 700; }
+#upgradeState, #unlockState { font-weight: 600; color: #caf6ff; }
 
-.meter {
-  height: 12px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 999px;
-  margin-top: 0.2rem;
-  overflow: hidden;
-}
-#feverMeter {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--cyan), var(--pink), #fff280);
-  transition: width 90ms linear;
-}
-#stabilityMeter {
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(90deg, #ff8362, #ffdd5f, #7df6b8);
-  transition: width 140ms linear;
-}
+.meter { height: 12px; background: rgba(255,255,255,0.12); border-radius: 999px; margin-top: 0.2rem; overflow: hidden; }
+#feverMeter { height: 100%; width: 0%; background: linear-gradient(90deg, var(--cyan), var(--pink), #fff280); transition: width 120ms linear; }
+#stabilityMeter { height: 100%; width: 100%; background: linear-gradient(90deg, #ff8362, #ffdd5f, #7df6b8); transition: width 120ms linear; }
 
 #arena {
   position: relative;
@@ -70,46 +40,43 @@ body {
   border-radius: 24px;
   overflow: hidden;
   border: 2px solid rgba(125, 187, 255, 0.5);
-  background: linear-gradient(145deg, rgba(9, 16, 43, 0.96), rgba(7, 11, 27, 0.97));
+  background: linear-gradient(180deg, rgba(9,16,43,0.96), rgba(7,11,27,0.97));
 }
+#roadFlow, #track, #parallaxBack, #parallaxFront, #bgPulse { position: absolute; inset: 0; pointer-events: none; }
 
-#track,
-#parallaxBack,
-#parallaxFront,
-#bgPulse {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+/* true side-scroll illusion: all major layers stream right -> left */
+#roadFlow {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 120px, rgba(255,255,255,0.12) 120px 130px, transparent 130px 240px),
+    linear-gradient(180deg, rgba(20,45,88,0.2), transparent 20%, transparent 80%, rgba(20,45,88,0.2));
+  animation: sideScrollFast 1.4s linear infinite;
+  opacity: 0.65;
 }
-
 #track {
   inset: 6% 8%;
   border-radius: 26px;
   border: 2px solid rgba(110, 243, 255, 0.34);
   box-shadow: inset 0 0 30px rgba(55, 212, 255, 0.15);
   background:
-    repeating-linear-gradient(90deg, rgba(54, 171, 221, 0.14) 0 28px, transparent 28px 56px),
+    repeating-linear-gradient(90deg, rgba(54, 171, 221, 0.16) 0 32px, transparent 32px 64px),
     linear-gradient(0deg, rgba(38, 77, 120, 0.24), rgba(16, 28, 55, 0.2));
-  animation: trackScroll 3.2s linear infinite;
+  animation: sideScrollMed 2.3s linear infinite;
 }
-
 #parallaxBack {
   background:
-    radial-gradient(circle at 10% 20%, rgba(101, 134, 255, 0.2), transparent 28%),
-    radial-gradient(circle at 80% 80%, rgba(255, 120, 212, 0.17), transparent 32%);
-  animation: parallaxBack 12s linear infinite;
+    radial-gradient(circle at 20% 20%, rgba(101, 134, 255, 0.18), transparent 30%),
+    radial-gradient(circle at 85% 78%, rgba(255, 120, 212, 0.14), transparent 34%);
+  animation: sideScrollSlow 10s linear infinite;
 }
-
 #parallaxFront {
   mix-blend-mode: screen;
-  background: repeating-linear-gradient(125deg, rgba(145, 255, 243, 0.08) 0 14px, transparent 14px 44px);
-  animation: parallaxFront 6s linear infinite;
+  background: repeating-linear-gradient(125deg, rgba(145, 255, 243, 0.08) 0 14px, transparent 14px 40px);
+  animation: sideScrollMed 2.8s linear infinite;
 }
-
 #bgPulse {
   inset: -18%;
-  background: radial-gradient(circle at center, rgba(255, 95, 205, 0.18), rgba(76, 220, 255, 0.1), transparent 60%);
-  animation: drift 8s ease-in-out infinite alternate;
+  background: radial-gradient(circle at center, rgba(255, 95, 205, 0.14), rgba(76, 220, 255, 0.08), transparent 60%);
+  animation: sideScrollSlow 14s linear infinite;
 }
 
 #player {
@@ -119,92 +86,38 @@ body {
   border-radius: 42% 58% 54% 46% / 40% 49% 51% 60%;
   transform-origin: center;
   background: linear-gradient(145deg, #9bf8ff, #3ac9ff 45%, #9381ff);
-  box-shadow: 0 0 26px rgba(83, 203, 255, 0.8), inset -6px -8px 15px rgba(20, 46, 122, 0.4), inset 5px 6px 10px rgba(255,255,255,0.56);
+  box-shadow: 0 0 24px rgba(83, 203, 255, 0.75), inset -6px -8px 15px rgba(20, 46, 122, 0.4), inset 5px 6px 10px rgba(255,255,255,0.56);
   z-index: 5;
+  will-change: transform, left, top;
 }
-#player.idle { animation: bounceIdle 920ms ease-in-out infinite; }
-
-.eyes {
-  position: absolute;
-  width: 70%;
-  top: 34%;
-  left: 16%;
-  display: flex;
-  justify-content: space-between;
-}
+#player.idle { animation: bounceIdle 1s ease-in-out infinite; }
+.eyes { position: absolute; width: 70%; top: 34%; left: 16%; display: flex; justify-content: space-between; }
 .eyes span { width: 7px; height: 9px; border-radius: 50%; background: #123157; }
-.mouth {
-  position: absolute;
-  width: 18px;
-  height: 7px;
-  border-radius: 0 0 9px 9px;
-  border-bottom: 2px solid #1b3d68;
-  left: 50%; transform: translateX(-50%); top: 61%;
-}
+.mouth { position: absolute; width: 18px; height: 7px; border-radius: 0 0 9px 9px; border-bottom: 2px solid #1b3d68; left: 50%; transform: translateX(-50%); top: 61%; }
 
-.enemy {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.45);
-}
-.push-bot {
-  background: linear-gradient(145deg, #ff89de, #a56cff);
-  box-shadow: 0 0 16px rgba(255, 90, 190, 0.62);
-}
-.push-bot span {
-  position: absolute;
-  inset: 12px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.86);
-  animation: pulse 0.8s infinite;
-}
+.enemy { position: absolute; width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.45); }
+.push-bot { background: linear-gradient(145deg, #ff89de, #a56cff); box-shadow: 0 0 12px rgba(255, 90, 190, 0.52); }
+.push-bot span { position: absolute; inset: 11px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.86); animation: pulse 1s infinite; }
 
 .particle {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   pointer-events: none;
-  background: var(--aqua);
-  box-shadow: 0 0 12px currentColor;
+  background: #70efff;
+  box-shadow: 0 0 8px currentColor;
   z-index: 2;
 }
+.trail { position: absolute; width: 20px; height: 9px; border-radius: 999px; pointer-events: none; background: linear-gradient(90deg, rgba(120,255,248,0.8), rgba(255,95,210,0.08)); filter: blur(1px); }
 
-.trail {
-  position: absolute;
-  width: 26px;
-  height: 12px;
-  border-radius: 999px;
-  pointer-events: none;
-  background: linear-gradient(90deg, rgba(120,255,248,0.85), rgba(255,95,210,0.1));
-  filter: blur(1px);
-}
-
-.fever { animation: feverShake 300ms linear infinite; }
+.fever { animation: feverShake 450ms linear infinite; }
 .stability-low { box-shadow: 0 0 18px rgba(255, 121, 86, 0.55), inset 0 0 16px rgba(255, 141, 80, 0.25); }
+.controls { display: grid; grid-template-columns: repeat(3, minmax(140px, 1fr)); gap: 0.2rem 1rem; opacity: 0.92; }
 
-.controls {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(140px, 1fr));
-  gap: 0.2rem 1rem;
-  opacity: 0.92;
-}
-
-@keyframes bounceIdle {
-  0%, 100% { transform: translateY(0) scale(1, 1); }
-  25% { transform: translateY(2px) scale(1.05, 0.94); }
-  55% { transform: translateY(-4px) scale(0.94, 1.08); }
-}
-@keyframes pulse { from { transform: scale(1); opacity: 1;} to { transform: scale(1.4); opacity: 0;} }
-@keyframes drift { from { transform: translate(-6%, -2%) scale(1);} to { transform: translate(8%, 4%) scale(1.1);} }
-@keyframes feverShake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(1px); }
-  50% { transform: translateX(-1px); }
-  100% { transform: translateX(0); }
-}
-@keyframes trackScroll { from { background-position: 0 0, 0 0; } to { background-position: -112px 0, 0 0; } }
-@keyframes parallaxBack { from { transform: translateX(0); } to { transform: translateX(-80px); } }
-@keyframes parallaxFront { from { transform: translateX(0); } to { transform: translateX(120px); } }
+@keyframes bounceIdle { 0%,100%{transform:translateY(0) scale(1,1);} 50%{transform:translateY(-2px) scale(0.97,1.03);} }
+@keyframes pulse { from { transform: scale(1); opacity: 1;} to { transform: scale(1.35); opacity: 0;} }
+@keyframes feverShake { 0%{transform:translateX(0)} 50%{transform:translateX(-1px)} 100%{transform:translateX(1px)} }
+@keyframes sideScrollFast { from { transform: translateX(0); } to { transform: translateX(-140px); } }
+@keyframes sideScrollMed { from { transform: translateX(0); } to { transform: translateX(-90px); } }
+@keyframes sideScrollSlow { from { transform: translateX(0); } to { transform: translateX(-50px); } }
