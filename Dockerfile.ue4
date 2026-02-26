@@ -1,0 +1,11 @@
+# syntax=docker/dockerfile:1
+ARG UE4_IMAGE=adamrehn/ue4-full:4.27.2
+FROM ${UE4_IMAGE}
+
+SHELL ["/bin/bash", "-lc"]
+
+# Keep all generated intermediate artifacts inside the mounted workspace.
+WORKDIR /workspace
+
+# Optional helper for CI/debug logs.
+RUN echo "Using UE4 base image: ${UE4_IMAGE}" > /etc/ue4-image.txt
